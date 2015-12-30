@@ -15,11 +15,13 @@ public class Timer {
     java.util.Timer timer;
     int countDown;
     Label countDownText;
+    //Game currentGame;
 
     public Timer () {
         countDownText = new Label();
         countDown = 60;
         timer = new java.util.Timer();
+        //currentGame = ;
     }
 
     public void startTimer() {
@@ -38,6 +40,7 @@ public class Timer {
 
                         if (countDown == 0)
                             timer.cancel();
+                            //currentGame.endGame();
                     }
                 });
             }

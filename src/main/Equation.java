@@ -1,6 +1,9 @@
 package main;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.Random;
 
@@ -18,25 +21,26 @@ public class Equation {
     }
 
     public void generateRandomValues(GameLevel level) {
-        // pick random values for the first and the second parameter
+        // vali suvalised v22rtused esimeseks ja teiseks parameetriks
         Sign[] signs = Sign.values();
         Random random = new Random();
-        sign = signs[random.nextInt(2)];
+        sign = signs[random.nextInt(3)];
+        // loo 3 erinevat levelit suvaliste v22rtuste tekitamiseks
         switch (level) {
             case ONE: {
-                firstMember = 1 + random.nextInt(5);
-                secondMember = 1 + random.nextInt(5);
+                firstMember = 1 + random.nextInt(1); //esimene arv on 1-7
+                secondMember = 1 + random.nextInt(7); //teine arv on 1-7
                 break;
             }
             case TWO: {
 
-                firstMember = 4 + random.nextInt(6);
-                secondMember = 4 + random.nextInt(6);
+                firstMember = 4 + random.nextInt(12); //esimene arv on 4-12
+                secondMember = 4 + random.nextInt(12); //teine arv on 4-12
                 break;
             }
             case THREE: {
-                firstMember = 10 + random.nextInt(10);
-                secondMember = 10 + random.nextInt(10);
+                firstMember = 10 + random.nextInt(20); //esimene arv on 10-20
+                secondMember = 10 + random.nextInt(20); //teine arv on 10-20
                 break;
             }
 
@@ -62,14 +66,25 @@ public class Equation {
         return true;
     }
 
+    /*/public Label looEsimeseleV22rtuselePilt(int firstMember) {
+        Label numberyks = new Label();
+        if (firstMember == 1) {
+            Image image = new Image("main/numberyks.png");
+            ImageView pilt1 = new ImageView();
+            pilt1.setImage(image);
+        }
+        return numberyks;
+    }/*/
 
     private void generateLabel() {
         if (label == null) {
             label = new Label(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         } else {
-            label.setText(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
+            label.setText(firstMember + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         }
     }
+
+
 
     public Label getLabel() {
         return label;
