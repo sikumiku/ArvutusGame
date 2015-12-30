@@ -15,3 +15,6 @@ JavaFX padding eemaldamine - http://stackoverflow.com/questions/27338844/remove-
 GridPane'i loomine ja kasutus - https://docs.oracle.com/javafx/2/api/javafx/scene/layout/GridPane.html, https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm
 Buttonite visuaalne muutmine - http://docs.oracle.com/javafx/2/ui_controls/button.htm
 Taimeri loomine ja muutmine - http://stackoverflow.com/questions/26615853/javafx-countdown-doesnt-work, http://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/
+Väärtuste lisamine Textfieldi: http://stackoverflow.com/questions/16484641/java-calculator-add-numbers-to-textfield
+Textfield tausta kaotamine: http://stackoverflow.com/questions/21936585/transparent-background-of-a-textarea-in-javafx-8
+Teksti enda muutmine: https://docs.oracle.com/javafx/2/text/jfxpub-text.htm
