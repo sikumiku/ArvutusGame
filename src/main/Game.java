@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
@@ -23,6 +24,7 @@ public class Game extends Application {
     Stage stage;
     Equation firstEquation;
     TextField answer;
+    BackgroundImage taustapilt;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -34,9 +36,10 @@ public class Game extends Application {
 
     private void seadistaStseen() {
         m2nguTaust = new StackPane();
-        Rectangle taustapilt = new Rectangle(750,500);
-        taustapilt.setFill(Color.YELLOW);
-        m2nguTaust.getChildren().add(taustapilt);
+        taustapilt = new BackgroundImage(new Image("main/m2ngutaust.png",750,500,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        m2nguTaust.setBackground(new Background(taustapilt));
 
         maailm = new GridPane();
         maailm.setHgap(27);
@@ -82,6 +85,7 @@ public class Game extends Application {
         maailm.add(numPad.getButton0Label(), 3, 5);
         maailm.add(numPad.getButtonDeleteLabel(), 4, 5);
         maailm.add(numPad.getButtonVastaLabel(), 5, 5);
+        maailm.add(numPad.getLabelKitty(), 0, 4);
 
         runTimer.startTimer();
 
