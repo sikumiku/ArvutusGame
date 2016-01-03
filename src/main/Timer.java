@@ -2,6 +2,7 @@ package main;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 import java.util.TimerTask;
@@ -15,13 +16,13 @@ public class Timer {
     java.util.Timer timer;
     int countDown;
     Label countDownText;
-    //Game currentGame;
+    Game currentGame;
 
-    public Timer () {
+    public Timer (Game currentGame) {
         countDownText = new Label();
         countDown = 60;
         timer = new java.util.Timer();
-        //currentGame = ;
+        this.currentGame = currentGame;
     }
 
     public void startTimer() {
@@ -38,9 +39,10 @@ public class Timer {
                         countDownText.setTextFill(Color.RED);
                         countDownText.setStyle("-fx-font-size: 4em;");
 
-                        if (countDown == 0)
+                        if (countDown == 0) {
+                            currentGame.endGame();
                             timer.cancel();
-                            //currentGame.endGame();
+                        }
                     }
                 });
             }

@@ -28,8 +28,8 @@ public class Equation {
         // loo 3 erinevat levelit suvaliste v22rtuste tekitamiseks
         switch (level) {
             case ONE: {
-                firstMember = 1 + random.nextInt(1); //esimene arv on 1-7
-                secondMember = 1 + random.nextInt(7); //teine arv on 1-7
+                firstMember = 1 + random.nextInt(6); //esimene arv on 1-7
+                secondMember = 1 + random.nextInt(6); //teine arv on 1-7
                 break;
             }
             case TWO: {

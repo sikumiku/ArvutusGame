@@ -27,14 +27,9 @@ public class Buttons {
     Button buttonMinus;
     Button buttonDelete;
     Button buttonVasta;
-    ImageView giffy;
+    Button startGame;
 
     public Buttons(TextField answerField, Game currentGame) {
-        giffy = new ImageView();
-        Image kittypilt = new Image("main/kittytestlevel1.gif");
-        giffy.setImage(kittypilt);
-        giffy.setFitWidth(200);
-        giffy.setFitHeight(300);
         ImageView number1 = new ImageView(new Image("main/button1.png"));
         button1 = new Button("", number1);
         button1.setOnAction(event -> answerField.setText(answerField.getText() + "1"));
@@ -141,9 +136,10 @@ public class Buttons {
         return buttonVasta;
     }
 
-    public ImageView getLabelKitty() {
-        return giffy;
+    public Button getButtonStartGame() {
+        return startGame;
     }
+
 }
 
 
