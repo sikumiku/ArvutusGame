@@ -25,6 +25,7 @@ public class Game extends Application {
     BackgroundImage taustapilt;
     ImageView giffy;
     private int correctAnswerCounter;
+    GameLevel currentlevel;
 
 
     @Override
@@ -45,9 +46,9 @@ public class Game extends Application {
 
         ImageView alusta = new ImageView(new Image("main/buttonAlusta.png"));
         Button startGameButton = new Button("", alusta);
-        startGameButton.setLayoutX(400);
-        startGameButton.setLayoutY(120);
-        startGameButton.setOnAction(event -> newGameScene());
+        startGameButton.setLayoutX(540);
+        startGameButton.setLayoutY(405);
+        startGameButton.setOnAction(event -> newGameScene(GameLevel.ONE));
         startGameButton.setPadding(Insets.EMPTY);
 
         startTaust.getChildren().add(startGameButton);
@@ -57,7 +58,34 @@ public class Game extends Application {
 
     }
 
-    public void newGameScene() {
+    /*giffy = new ImageView();
+    Image kittypiltlevel1 = new Image("main/kittylevel1.png");
+    giffy.setImage(kittypiltlevel1);
+    maailm.add(giffy, 0,4);*/
+
+    private ImageView setGiffies(GameLevel level){
+        giffy = new ImageView();
+        switch (level) {
+            case ONE: {
+                Image kittypiltlevel1 = new Image("main/kittylevel1.png");
+                giffy.setImage(kittypiltlevel1);
+                break;
+            }
+            case TWO: {
+                Image kittypiltlevel2 = new Image("main/kittylevel2.png");
+                giffy.setImage(kittypiltlevel2);
+                break;
+            }
+            case THREE: {
+                Image kittypiltlevel3 = new Image("main/kittylevel3.png");
+                giffy.setImage(kittypiltlevel3);
+                break;
+            }
+        }return giffy;
+    }
+
+    public void newGameScene(GameLevel level) {
+        currentlevel = level;
         correctAnswerCounter = 0;
         m2nguTaust = new StackPane();
         taustapilt = new BackgroundImage(new Image("main/m2ngutaust.png",750,500,false,true),
@@ -80,21 +108,19 @@ public class Game extends Application {
         maailm.getRowConstraints().add(new RowConstraints(63));
         maailm.getRowConstraints().add(new RowConstraints(63));
         maailm.getRowConstraints().add(new RowConstraints(63));
-        maailm.getRowConstraints().add(new RowConstraints(91));
-        maailm.setGridLinesVisible(true);
+        maailm.getRowConstraints().add(new RowConstraints(63));
+        maailm.getRowConstraints().add(new RowConstraints(1));
 
         m2nguTaust.getChildren().add(maailm);
         answer = new TextField();
         answer.setPrefSize(100, 100);
         answer.setBackground(Background.EMPTY);
-        answer.setFont(Font.font("Impact", 40));
-        maailm.add(answer, 5, 1, 2, 1);
+        answer.setFont(Font.font("Impact", 60));
+        maailm.add(answer, 4, 1, 3, 1);
 
-        firstEquation = new Equation(GameLevel.ONE);
         Timer runTimer = new Timer(this);
         Buttons numPad = new Buttons(answer, this);
 
-        maailm.add(firstEquation.getLabel(), 2, 1);
         maailm.add(runTimer.getLabel(), 6, 3);
         maailm.add(numPad.getButton1Label(), 2, 2);
         maailm.add(numPad.getButton2Label(), 3, 2);
@@ -110,10 +136,12 @@ public class Game extends Application {
         maailm.add(numPad.getButtonDeleteLabel(), 4, 5);
         maailm.add(numPad.getButtonVastaLabel(), 5, 5);
 
-        giffy = new ImageView();
-        Image kittypiltlevel1 = new Image("main/kittylevel1.png");
-        giffy.setImage(kittypiltlevel1);
-        maailm.add(giffy, 0,4);
+        firstEquation = new Equation(level);
+
+        maailm.add(setGiffies(currentlevel), 0, 4);
+
+        maailm.add(firstEquation.getLabel(), 2, 1, 3, 1);
+
 
         runTimer.startTimer();
 
@@ -128,33 +156,107 @@ public class Game extends Application {
         String input = answer.getText();
         if (firstEquation.isCorrectAnswer(Double.parseDouble(input))) {
             correctAnswerCounter++;
-            Image happykittygif1 = new Image("main/happykittylevel1.gif");
-            giffy.setImage(happykittygif1);
-            firstEquation.generateRandomValues(GameLevel.ONE);
+            if (currentlevel == GameLevel.ONE){
+                Image happykittygif1 = new Image("main/happykittylevel1.gif");
+                giffy.setImage(happykittygif1);
+            } else if (currentlevel == GameLevel.TWO){
+                Image happykittygif2 = new Image("main/happykittylevel2.gif");
+                giffy.setImage(happykittygif2);
+            } else{
+                Image happykittygif3 = new Image("main/happykittylevel3.gif");
+                giffy.setImage(happykittygif3);
+            }
+            firstEquation.generateRandomValues(currentlevel);
             answer.clear();
         } else {
-            Image sadkittygif1 = new Image("main/sadkittylevel1.gif");
-            giffy.setImage(sadkittygif1);
+            if (currentlevel == GameLevel.ONE){
+                Image sadkittygif1 = new Image("main/sadkittylevel1.gif");
+                giffy.setImage(sadkittygif1);
+            } else if (currentlevel == GameLevel.TWO){
+                Image sadkittygif2 = new Image("main/sadkittylevel2.gif");
+                giffy.setImage(sadkittygif2);
+            } else{
+                Image sadkittygif3 = new Image("main/sadkittylevel3.gif");
+                giffy.setImage(sadkittygif3);
+            }
             answer.clear();
         }
     }
 
     public void endGame() {
         if (correctAnswerCounter >= 10) {
-            Label tekst = new Label("Võitsid!");
-            StackPane v6iduStseen = new StackPane();
-            Scene stseen = new Scene(v6iduStseen, 750, 500);
-            stage.setScene(stseen);
-            v6iduStseen.getChildren().add(tekst);
+            Pane v6iduTaust = new Pane();
+            BackgroundImage plainTaustPilt = new BackgroundImage(new Image("main/plainTaust.png",750,500,false,true),
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+            v6iduTaust.setBackground(new Background(plainTaustPilt));
+            ImageView tubli = new ImageView(new Image("main/winGamePilt.png"));
+            tubli.setLayoutX(290);
+            tubli.setLayoutY(150);
+
+            ImageView j2tka = new ImageView(new Image("main/buttonJ2tka.png"));
+            Button j2tkaGameButton = new Button("", j2tka);
+            j2tkaGameButton.setLayoutX(290);
+            j2tkaGameButton.setLayoutY(310);
+            if (currentlevel == GameLevel.ONE) {
+                j2tkaGameButton.setOnAction(event -> newGameScene(GameLevel.TWO));
+            } else if (currentlevel == GameLevel.TWO) {
+                j2tkaGameButton.setOnAction(event -> newGameScene(GameLevel.THREE));
+            } else {
+                j2tkaGameButton.setOnAction(event -> v6iduScene());
+            }
+
+            j2tkaGameButton.setPadding(Insets.EMPTY);
+
+            v6iduTaust.getChildren().add(tubli);
+            v6iduTaust.getChildren().add(j2tkaGameButton);
+
+            Scene scene = new Scene(v6iduTaust, 750, 500);
+            stage.setScene(scene);
         } else {
-            Label tekst2 = new Label("Kaotasid!");
-            StackPane v6iduStseen = new StackPane();
-            Scene stseen = new Scene(v6iduStseen, 750, 500);
-            stage.setScene(stseen);
-            v6iduStseen.getChildren().add(tekst2);
 
+            Pane kaotusTaust = new Pane();
+            BackgroundImage plainTaustPilt = new BackgroundImage(new Image("main/plainTaust.png", 750, 500, false, true),
+                    BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                    BackgroundSize.DEFAULT);
+            kaotusTaust.setBackground(new Background(plainTaustPilt));
+            ImageView mitteTubli = new ImageView(new Image("main/loseGamePilt.png"));
+            mitteTubli.setLayoutX(145);
+            mitteTubli.setLayoutY(140);
+
+            ImageView uuesti = new ImageView(new Image("main/buttonUuesti.png"));
+            Button uuestiGameButton = new Button("", uuesti);
+            uuestiGameButton.setLayoutX(230);
+            uuestiGameButton.setLayoutY(310);
+            uuestiGameButton.setOnAction(event -> newGameScene(GameLevel.ONE));
+            uuestiGameButton.setPadding(Insets.EMPTY);
+
+            kaotusTaust.getChildren().add(mitteTubli);
+            kaotusTaust.getChildren().add(uuestiGameButton);
+
+            Scene scene = new Scene(kaotusTaust, 750, 500);
+            stage.setScene(scene);
         }
+    }
 
+    private void v6iduScene() {
+        Pane v6iduTaust = new Pane();
+        BackgroundImage v6iduPilt = new BackgroundImage(new Image("main/finalWinImage.png",750,500,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        v6iduTaust.setBackground(new Background(v6iduPilt));
 
+        ImageView uusm2ng = new ImageView(new Image("main/buttonUusM2ng.png"));
+        Button uusM2ngButton = new Button("", uusm2ng);
+        uusM2ngButton.setLayoutX(530);
+        uusM2ngButton.setLayoutY(420);
+        uusM2ngButton.setOnAction(event -> newGameScene(GameLevel.ONE));
+
+        uusM2ngButton.setPadding(Insets.EMPTY);
+
+        v6iduTaust.getChildren().add(uusM2ngButton);
+
+        Scene scene = new Scene(v6iduTaust, 750, 500);
+        stage.setScene(scene);
     }
 }

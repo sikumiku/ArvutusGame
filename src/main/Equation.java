@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 
 import java.util.Random;
 
@@ -21,7 +22,7 @@ public class Equation {
     }
 
     public void generateRandomValues(GameLevel level) {
-        // vali suvalised v22rtused esimeseks ja teiseks parameetriks
+        // vali suvalised v22rtused esimeseks ja teiseks parameetriks/
         Sign[] signs = Sign.values();
         Random random = new Random();
         sign = signs[random.nextInt(3)];
@@ -34,16 +35,15 @@ public class Equation {
             }
             case TWO: {
 
-                firstMember = 4 + random.nextInt(12); //esimene arv on 4-12
-                secondMember = 4 + random.nextInt(12); //teine arv on 4-12
+                firstMember = 4 + random.nextInt(10); //esimene arv on 4-12
+                secondMember = 4 + random.nextInt(10); //teine arv on 4-12
                 break;
             }
             case THREE: {
-                firstMember = 10 + random.nextInt(20); //esimene arv on 10-20
-                secondMember = 10 + random.nextInt(20); //teine arv on 10-20
+                firstMember = 8 + random.nextInt(14); //esimene arv on 10-20
+                secondMember = 8 + random.nextInt(14); //teine arv on 10-20
                 break;
             }
-
         }
 
         generateLabel();
@@ -66,22 +66,13 @@ public class Equation {
         return true;
     }
 
-    /*/public Label looEsimeseleV22rtuselePilt(int firstMember) {
-        Label numberyks = new Label();
-        if (firstMember == 1) {
-            Image image = new Image("main/numberyks.png");
-            ImageView pilt1 = new ImageView();
-            pilt1.setImage(image);
-        }
-        return numberyks;
-    }/*/
-
     private void generateLabel() {
         if (label == null) {
             label = new Label(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         } else {
             label.setText(firstMember + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         }
+        label.setFont(new Font("Impact", 60));
     }
 
 
