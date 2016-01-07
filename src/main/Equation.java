@@ -1,15 +1,14 @@
 package main;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 
 import java.util.Random;
 
 /**
  * Created by Siku on 13/12/15.
+ * Klassis luuakse suvaline 1. ja 2. number olenevalt levelist, kalkuleeritakse suvaliste arvude tehte vastus ning
+ * luuakse tehte Label m‰ngu jaoks, mida ka m‰ngijatele kuvatakse.
  */
 public class Equation {
     Integer firstMember;
@@ -22,35 +21,35 @@ public class Equation {
     }
 
     public void generateRandomValues(GameLevel level) {
-        // vali suvalised v22rtused esimeseks ja teiseks parameetriks/
+        // loo maatriks, mida saab kasutada, et valida suvaline tehtem‰rk 3 erineva tehtem‰rgi
+        // seast (hangitakse Sign enum klassist)
         Sign[] signs = Sign.values();
         Random random = new Random();
         sign = signs[random.nextInt(3)];
-        // loo 3 erinevat levelit suvaliste v22rtuste tekitamiseks
+        // anna m‰ngule teada, milliste suvaliste v‰‰rtustega arvud kuvada 3 erineva leveli puhul. V‰‰rtuste piirkonda
+        // kontrollitakse GameConfiguration klassis.
         switch (level) {
             case ONE: {
-                firstMember = 1 + random.nextInt(6); //esimene arv on 1-7
-                secondMember = 1 + random.nextInt(6); //teine arv on 1-7
+                firstMember = GameConfiguration.TASE1_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE1_HIGHEST_NUMBER);
+                secondMember = GameConfiguration.TASE1_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE1_HIGHEST_NUMBER);
                 break;
             }
             case TWO: {
-
-                firstMember = 4 + random.nextInt(10); //esimene arv on 4-12
-                secondMember = 4 + random.nextInt(10); //teine arv on 4-12
+                firstMember = GameConfiguration.TASE2_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE2_HIGHEST_NUMBER);
+                secondMember = GameConfiguration.TASE2_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE2_HIGHEST_NUMBER);
                 break;
             }
             case THREE: {
-                firstMember = 8 + random.nextInt(14); //esimene arv on 10-20
-                secondMember = 8 + random.nextInt(14); //teine arv on 10-20
+                firstMember = GameConfiguration.TASE3_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE3_HIGHEST_NUMBER);
+                secondMember = GameConfiguration.TASE3_LOWEST_NUMBER + random.nextInt(GameConfiguration.TASE3_HIGHEST_NUMBER);
                 break;
             }
         }
-
         generateLabel();
     }
 
+    //arvutatakse, mis on tehte tegelik vastus olenevalt sellest, kas tehe on liitmine, lahutamine vıi korrutamine
     public boolean isCorrectAnswer(double responseToTest) {
-        // checks if value is true
         switch (sign) {
             case PLUS: {
                 return (firstMember + secondMember) == responseToTest;
@@ -61,11 +60,11 @@ public class Equation {
             case MULTIPLY: {
                 return (firstMember * secondMember) == responseToTest;
             }
-
         }
         return true;
     }
 
+    //Kui labelit ei ole, luuakse tehte Label, mida kuvatakse m‰ngus ja antakse font ning fondi suurus.
     private void generateLabel() {
         if (label == null) {
             label = new Label(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
@@ -74,8 +73,6 @@ public class Equation {
         }
         label.setFont(new Font("Impact", 60));
     }
-
-
 
     public Label getLabel() {
         return label;
