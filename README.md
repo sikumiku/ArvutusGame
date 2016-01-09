@@ -9,7 +9,7 @@ Muud märkmed:
 
 Mängu UI on üles ehitatud GridPane'iga, millel on ära defineeritud veerude ja ridade ning nende vahede suurus. Nii arvud kui ka tehtemärk genereeritakse suvaliselt. Arvud on sõltuvuses mängu raskustasest. Jagamist ei ole. 
 
-Kasutatud materjal:
+Kasutatud kood + lisamaterjal:
 
 JavaFX padding eemaldamine - http://stackoverflow.com/questions/27338844/remove-javafx-button-padding
 
@@ -24,3 +24,5 @@ Väärtuste lisamine Textfieldi: http://stackoverflow.com/questions/16484641/jav
 Textfield tausta kaotamine: http://stackoverflow.com/questions/21936585/transparent-background-of-a-textarea-in-javafx-8
 
 Teksti enda muutmine: https://docs.oracle.com/javafx/2/text/jfxpub-text.htm
+
+Switchi kasutamine: http://examples.javacodegeeks.com/java-basics/switch-statement/java-switch-case-example/
