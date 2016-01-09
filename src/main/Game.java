@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class Game extends Application {
 
     public static final int NUMPAD_BUTTON_WIDTH = 63;
+    public static final int NUMPAD_BUTTON_HEIGHT = 63;
     GridPane gameGrid;
     StackPane m2nguTaust;
     Stage stage;
@@ -48,6 +49,7 @@ public class Game extends Application {
         startGameButton.setLayoutY(405);
         startGameButton.setOnAction(event -> newGameScene(GameLevel.ONE));
         startGameButton.setPadding(Insets.EMPTY);
+        startGameButton.setStyle("-fx-background-color: transparent");
 
         startTaust.getChildren().add(startGameButton);
 
@@ -165,10 +167,10 @@ public class Game extends Application {
         gridPaneResult.getColumnConstraints().add(new ColumnConstraints(166));
         gridPaneResult.getRowConstraints().add(new RowConstraints(6));
         gridPaneResult.getRowConstraints().add(new RowConstraints(79));
-        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_WIDTH));
-        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_WIDTH));
-        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_WIDTH));
-        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_WIDTH));
+        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_HEIGHT));
+        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_HEIGHT));
+        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_HEIGHT));
+        gridPaneResult.getRowConstraints().add(new RowConstraints(NUMPAD_BUTTON_HEIGHT));
         gridPaneResult.getRowConstraints().add(new RowConstraints(1));
         return gridPaneResult;
     }
@@ -226,6 +228,7 @@ public class Game extends Application {
             Button j2tkaGameButton = new Button("", j2tka);
             j2tkaGameButton.setLayoutX(290);
             j2tkaGameButton.setLayoutY(310);
+            j2tkaGameButton.setStyle("-fx-background-color: transparent");
             //Olenevalt levelist, käitub nupp erinevalt ja alustab kas järgmist levelit või kuvab mängu võiduekraani.
             if (currentlevel == GameLevel.ONE) {
                 j2tkaGameButton.setOnAction(event -> newGameScene(GameLevel.TWO));
@@ -242,7 +245,7 @@ public class Game extends Application {
             Scene scene = new Scene(v6iduTaust, 750, 500);
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> System.exit(0));
-        } else {
+        } else if (correctAnswerCounter<10 && correctAnswerCounter>=0){
             Pane kaotusTaust = new Pane();
             BackgroundImage plainTaustPilt = getBackGroundImage("main/graphics/plainTaust.png");
             kaotusTaust.setBackground(new Background(plainTaustPilt));
@@ -254,6 +257,7 @@ public class Game extends Application {
             Button uuestiGameButton = new Button("", uuesti);
             uuestiGameButton.setLayoutX(230);
             uuestiGameButton.setLayoutY(310);
+            uuestiGameButton.setStyle("-fx-background-color: transparent");
             uuestiGameButton.setOnAction(event -> newGameScene(GameLevel.ONE)); //Käivita level1 mäng uuesti.
             uuestiGameButton.setPadding(Insets.EMPTY);
 
@@ -276,6 +280,7 @@ public class Game extends Application {
         Button uusM2ngButton = new Button("", uusm2ng);
         uusM2ngButton.setLayoutX(530);
         uusM2ngButton.setLayoutY(420);
+        uusM2ngButton.setStyle("-fx-background-color: transparent");
         uusM2ngButton.setOnAction(event -> newGameScene(GameLevel.ONE)); //Käivita level1 mäng uuesti.
 
         uusM2ngButton.setPadding(Insets.EMPTY);

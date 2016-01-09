@@ -69,7 +69,7 @@ public class Equation {
         if (label == null) {
             label = new Label(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         } else {
-            label.setText(firstMember + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
+            label.setText(firstMember.toString() + " " + sign.getSignCharacter() + " " + secondMember.toString() + " = ");
         }
         label.setFont(new Font("Impact", 60));
     }
