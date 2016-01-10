@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -121,7 +122,7 @@ public class Game extends Application {
         gameGrid.add(runTimer.getLabel(), 6, 3);
         createNumPad(numPad);
 
-        firstEquation = new Equation(level);
+        firstEquation = new Equation(currentlevel);
         gameGrid.add(firstEquation.getLabel(), 2, 1, 3, 1);
 
         gameGrid.add(createKittyImage(currentlevel), 0, 4);
